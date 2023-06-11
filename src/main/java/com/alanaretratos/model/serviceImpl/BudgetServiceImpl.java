@@ -2,7 +2,9 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.BudgetDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.BudgetDTOForm;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.repository.BudgetRepository;
 import com.alanaretratos.model.service.BudgetService;
@@ -17,21 +19,12 @@ public class BudgetServiceImpl implements BudgetService {
 	BudgetRepository budgetRepository;
 
 	@Override
-	public void createBudget(BudgetDTO budgetDTO) throws Exception {
-		Budget budget = budgetRepository.findById(budgetDTO.getId());
-		if (budget.equals(null)) {
-			budget.setClient(budgetDTO.getClient());
-			budget.setFirstContactDate(budgetDTO.getFirstContactDate());
-			budget.setId(budgetDTO.getId());
-			budget.setPhotoShootType(budgetDTO.getPhotoShootType());
-			budget.setPricing(budgetDTO.getPricing());
-			budget.setUpdateDate(budgetDTO.getUpdateDate());
+	public void createBudget(BudgetDTOForm budgetDTO) throws Exception {
+		Budget budget = new Budget();
 
-			budget.persist();
-		} else {
-			throw new Exception("Couldn't create this Budget");
-		}
+		BeanUtils.copyProperties(budget, budgetDTO);
 
+		budget.persist();
 	}
 
 	@Override
@@ -54,13 +47,12 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public void updateBudget(BudgetDTO budgetDTO) throws Exception {
-		Budget budget = budgetRepository.findByIdOptional(budgetDTO.getId()).orElseThrow();
+	public void updateBudget(BudgetDTOForm budgetDTO) throws Exception {
+		//TODO arrumar o metodo
+		Budget budget = budgetRepository.findByIdOptional((long) 1).orElseThrow();
 
-		budget.setPhotoShootType(budgetDTO.getPhotoShootType());
-		budget.setPricing(budgetDTO.getPricing());
-		budget.setUpdateDate(budgetDTO.getUpdateDate());
-
+		BeanUtils.copyProperties(budgetDTO, budget);
+		
 		budget.persist();
 	}
 

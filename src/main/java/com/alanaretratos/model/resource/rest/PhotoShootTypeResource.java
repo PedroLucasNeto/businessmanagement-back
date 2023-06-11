@@ -3,7 +3,7 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.PhotoShootTypeDTO;
+import com.alanaretratos.model.DTO.Form.PhotoShootTypeDTOForm;
 import com.alanaretratos.model.entity.PhotoShootType;
 import com.alanaretratos.model.service.PhotoShootTypeService;
 
@@ -29,7 +29,7 @@ public class PhotoShootTypeResource {
 	PhotoShootTypeService photoShootTypeService;
 	
 	@POST
-	public Response createPhotoShootType(PhotoShootTypeDTO photoShootTypeDTO) {
+	public Response createPhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) {
 		try {
 			photoShootTypeService.createPhotoShootType(photoShootTypeDTO);
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class PhotoShootTypeResource {
 	}
 
 	@PUT
-	public Response updatePhotoShootType(PhotoShootTypeDTO photoShootTypeDTO) {
+	public Response updatePhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) {
 		try {
 			photoShootTypeService.updatePhotoShootType(photoShootTypeDTO);
 		} catch (Exception e) {

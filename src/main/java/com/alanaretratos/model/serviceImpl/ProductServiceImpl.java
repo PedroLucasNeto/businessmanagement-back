@@ -2,14 +2,18 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.ProductDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.ProductDTOForm;
 import com.alanaretratos.model.entity.Product;
+import com.alanaretratos.model.repository.PricingRepository;
 import com.alanaretratos.model.repository.ProductRepository;
 import com.alanaretratos.model.service.ProductService;
 import com.alanaretratos.model.utils.UtilConstants;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class ProductServiceImpl implements ProductService {
 
@@ -17,17 +21,13 @@ public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository;
 
 	@Override
-	public void createProduct(ProductDTO productDTO) throws Exception {
-		Product product = productRepository.findById(productDTO.getId());
-		if (product.equals(null)) {
-			product.setName(productDTO.getName());
-			product.setPrice(productDTO.getPrice());
+	@Transactional
+	public void createProduct(ProductDTOForm productDTO) throws Exception {
+		Product product = new Product();
+		
+		BeanUtils.copyProperties(product, productDTO);
 
-			product.persist();
-		} else {
-			throw new Exception("Couldn't create this Product");
-		}
-
+			productRepository.persist(product);
 	}
 
 	@Override
@@ -42,14 +42,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void updateProduct(ProductDTO productDTO) throws Exception {
-		Product product = productRepository.findByIdOptional(productDTO.getId()).orElseThrow();
-		product.setName(productDTO.getName());
-		product.setPrice(productDTO.getPrice());
+	@Transactional
+	public void updateProduct(ProductDTOForm productDTO, Long id) throws Exception {
+		Product product = productRepository.findById(id);
+		BeanUtils.copyProperties(productDTO, product);
 		product.persist();
 	}
 
 	@Override
+	@Transactional
 	public void deleteProductFromDB(Long id) throws Exception {
 		Product product = productRepository.findByIdOptional(id).orElseThrow();
 		productRepository.delete(product);

@@ -3,7 +3,7 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.TransactionDTO;
+import com.alanaretratos.model.DTO.Form.TransactionDTOForm;
 import com.alanaretratos.model.entity.Transaction;
 import com.alanaretratos.model.service.TransactionService;
 
@@ -29,7 +29,7 @@ public class TransactionResource {
 	TransactionService transactionService;
 	
 	@POST
-	public Response createTransaction(TransactionDTO transactionDTO) {
+	public Response createTransaction(TransactionDTOForm transactionDTO) {
 		try {
 			transactionService.createTransaction(transactionDTO);
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class TransactionResource {
 	}
 
 	@PUT
-	public Response updateTransaction(TransactionDTO transactionDTO) {
+	public Response updateTransaction(TransactionDTOForm transactionDTO) {
 		try {
 			transactionService.updateTransaction(transactionDTO);
 		} catch (Exception e) {

@@ -2,7 +2,9 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.TransactionDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.TransactionDTOForm;
 import com.alanaretratos.model.entity.Transaction;
 import com.alanaretratos.model.repository.TransactionRepository;
 import com.alanaretratos.model.service.TransactionService;
@@ -17,23 +19,10 @@ public class TransactionServiceImpl implements TransactionService {
 	TransactionRepository transactionRepository;
 
 	@Override
-	public void createTransaction(TransactionDTO transactionDTO) throws Exception {
-		Transaction transaction = transactionRepository.findById(transactionDTO.getId());
-		if (transaction.equals(null)) {
-
-			transaction.setAmount(transactionDTO.getAmount());
-			transaction.setClient(transactionDTO.getClient());
-			transaction.setDescription(transactionDTO.getDescription());
-			transaction.setOrigin(transactionDTO.getOrigin());
-			transaction.setPaymentDate(transactionDTO.getPaymentDate());
-			transaction.setTransactionDate(transactionDTO.getTransactionDate());
-			transaction.setTransactionType(transactionDTO.getTransactionType());
-
+	public void createTransaction(TransactionDTOForm transactionDTO) throws Exception {
+		Transaction transaction = transactionRepository.findById((long) 1);
+		BeanUtils.copyProperties(transaction, transactionDTO);
 			transaction.persist();
-		} else {
-			throw new Exception("Couldn't create this Transaction");
-		}
-
 	}
 
 	@Override
@@ -48,15 +37,9 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public void updateTransaction(TransactionDTO transactionDTO) throws Exception {
-		Transaction transaction = transactionRepository.findByIdOptional(transactionDTO.getId()).orElseThrow();
-		transaction.setAmount(transactionDTO.getAmount());
-		transaction.setClient(transactionDTO.getClient());
-		transaction.setDescription(transactionDTO.getDescription());
-		transaction.setOrigin(transactionDTO.getOrigin());
-		transaction.setPaymentDate(transactionDTO.getPaymentDate());
-		transaction.setTransactionDate(transactionDTO.getTransactionDate());
-		transaction.setTransactionType(transactionDTO.getTransactionType());
+	public void updateTransaction(TransactionDTOForm transactionDTO) throws Exception {
+		Transaction transaction = transactionRepository.findByIdOptional((long) 1).orElseThrow();
+		BeanUtils.copyProperties(transactionDTO, transaction);
 		transaction.persist();
 	}
 

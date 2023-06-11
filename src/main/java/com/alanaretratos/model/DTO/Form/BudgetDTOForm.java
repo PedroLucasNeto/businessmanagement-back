@@ -1,4 +1,4 @@
-package com.alanaretratos.model.DTO;
+package com.alanaretratos.model.DTO.Form;
 
 import java.util.Date;
 
@@ -9,20 +9,14 @@ import com.alanaretratos.model.entity.Pricing;
 import lombok.Data;
 
 @Data
-public class BudgetDTO {
-
-	private Long id;
+public class BudgetDTOForm {
 
 	private Client client;
 
 	private PhotoShootType photoShootType;
 
-	private Date firstContactDate;
-
-	private Date updateDate;
-
 	private Pricing pricing;
 
-	private boolean status;
+	private Date firstContactDate;
 
 }

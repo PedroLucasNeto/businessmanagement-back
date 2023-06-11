@@ -3,7 +3,7 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.BudgetDTO;
+import com.alanaretratos.model.DTO.Form.BudgetDTOForm;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.service.BudgetService;
 
@@ -29,7 +29,7 @@ public class BudgetResource {
 	BudgetService budgetService;
 
 	@POST
-	public Response createBudget(BudgetDTO budgetDTO) {
+	public Response createBudget(BudgetDTOForm budgetDTO) {
 		try {
 			budgetService.createBudget(budgetDTO);
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class BudgetResource {
 	}
 
 	@PUT
-	public Response updateBudget(BudgetDTO budgetDTO) {
+	public Response updateBudget(BudgetDTOForm budgetDTO) {
 		try {
 			budgetService.updateBudget(budgetDTO);
 		} catch (Exception e) {

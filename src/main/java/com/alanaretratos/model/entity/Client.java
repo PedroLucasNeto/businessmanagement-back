@@ -2,6 +2,8 @@ package com.alanaretratos.model.entity;
 
 import java.util.Date;
 
+import com.alanaretratos.model.utils.UtilConstants;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,7 +45,11 @@ public class Client extends PanacheEntityBase {
 	@Column
 	private String observation;
 	
-	@Column
 	private boolean status;
+	
+	  @PrePersist
+	    public void prePersist() {
+	        this.status = UtilConstants.STATUS_ACTIVATED; 
+	    }
 
 }

@@ -2,7 +2,9 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.BookingDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.BookingDTOForm;
 import com.alanaretratos.model.entity.Booking;
 import com.alanaretratos.model.repository.BookingRepository;
 import com.alanaretratos.model.service.BookingService;
@@ -18,22 +20,11 @@ public class BookingServiceImpl implements BookingService {
 	BookingRepository bookingRepository;
 
 	@Override
-	public void createBooking(BookingDTO bookingDTO) throws Exception {
-		Booking booking = bookingRepository.findById(bookingDTO.getId());
-		if (booking.equals(null)) {
-			booking.setBookedDate(bookingDTO.getBookingDate());
-			booking.setDeliveryDate(bookingDTO.getDeliveryDate());
-			booking.setExtraPhoto(bookingDTO.isPaidExtraPhoto());
-			booking.setPaidExtraPhoto(bookingDTO.isExtraPhoto());
-			booking.setPaidProduct(bookingDTO.isPaidProduct());
-			booking.setPaidRemaining(bookingDTO.isPaidRemaining());
-			booking.setProducts(bookingDTO.getProducts());
-			booking.setTotalPrice(bookingDTO.getTotalPrice());
+	public void createBooking(BookingDTOForm bookingDTO) throws Exception {
+		Booking booking = new Booking();
+		BeanUtils.copyProperties(booking, bookingDTO);
 
-			booking.persist();
-		} else {
-			throw new Exception("Couldn't create this Booking");
-		}
+		booking.persist();
 
 	}
 
@@ -54,18 +45,11 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public void updateBooking(BookingDTO bookingDTO) throws Exception {
+	public void updateBooking(BookingDTOForm bookingDTO) throws Exception {
 
-		Booking booking = bookingRepository.findByIdOptional(bookingDTO.getId()).orElseThrow();
-
-		booking.setBookedDate(bookingDTO.getBookingDate());
-		booking.setDeliveryDate(bookingDTO.getDeliveryDate());
-		booking.setExtraPhoto(bookingDTO.isPaidExtraPhoto());
-		booking.setPaidExtraPhoto(bookingDTO.isExtraPhoto());
-		booking.setPaidProduct(bookingDTO.isPaidProduct());
-		booking.setPaidRemaining(bookingDTO.isPaidRemaining());
-		booking.setProducts(bookingDTO.getProducts());
-		booking.setTotalPrice(bookingDTO.getTotalPrice());
+		//TODO arrumar o metodo
+		Booking booking = bookingRepository.findByIdOptional((long) 1).orElseThrow();
+		BeanUtils.copyProperties(bookingDTO, booking);
 
 		booking.persist();
 

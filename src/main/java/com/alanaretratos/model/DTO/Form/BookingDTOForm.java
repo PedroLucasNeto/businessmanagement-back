@@ -1,23 +1,21 @@
-package com.alanaretratos.model.DTO;
+package com.alanaretratos.model.DTO.Form;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-import com.alanaretratos.model.entity.Booking;
+import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Product;
 
 import lombok.Data;
 
 @Data
-public class BookingDTO {
+public class BookingDTOForm {
 	
-	private Long id;
+	private Set<Product> products;
 
-	private Booking booking;
+	private Budget budget;
 
-	private List<Product> products;
-
-	private Date bookingDate;
+	private Date bookedDate;
 
 	private Date deliveryDate;
 
@@ -32,6 +30,4 @@ public class BookingDTO {
 	private boolean paidProduct;
 
 	private Double totalPrice;
-	
-	private boolean status;
 }

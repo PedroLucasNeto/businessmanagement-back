@@ -1,7 +1,10 @@
 package com.alanaretratos.model.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
@@ -13,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,9 +32,8 @@ public class Booking extends PanacheEntityBase {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "booking")
-	private List<Product> products;
+	@OneToMany(mappedBy = "booking")
+	private Set<BookingProducts> bookingProducts = new HashSet<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Budget budget;
@@ -57,8 +60,15 @@ public class Booking extends PanacheEntityBase {
 	private boolean paidProduct;
 
 	@Column
+	private Double subTotal;
+	
+	@Column
 	private Double totalPrice;
 
-	@Column
 	private boolean status;
+	
+	  @PrePersist
+	    public void prePersist() {
+	        this.status = UtilConstants.STATUS_ACTIVATED; 
+	    }
 }

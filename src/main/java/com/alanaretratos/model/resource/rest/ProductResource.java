@@ -3,7 +3,9 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.ProductDTO;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import com.alanaretratos.model.DTO.Form.ProductDTOForm;
 import com.alanaretratos.model.entity.Product;
 import com.alanaretratos.model.service.ProductService;
 
@@ -19,16 +21,20 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import lombok.Data;
 
 @Path("/product")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Tag(name="Produtos", description = "Operações referentes aos produtos")
+@Data
 public class ProductResource {
 	
 	@Inject
 	ProductService productService;
+	
 	@POST
-	public Response createProduct(ProductDTO productDTO) {
+	public Response createProduct(ProductDTOForm productDTO) {
 		try {
 			productService.createProduct(productDTO);
 		} catch (Exception e) {
@@ -61,9 +67,10 @@ public class ProductResource {
 	}
 
 	@PUT
-	public Response updateProduct(ProductDTO productDTO) {
+	@Path("{id}")
+	public Response updateProduct(ProductDTOForm productDTO, @PathParam("id") Long id) {
 		try {
-			productService.updateProduct(productDTO);
+			productService.updateProduct(productDTO, id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

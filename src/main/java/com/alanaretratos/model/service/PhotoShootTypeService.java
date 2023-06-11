@@ -2,18 +2,18 @@ package com.alanaretratos.model.service;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.PhotoShootTypeDTO;
+import com.alanaretratos.model.DTO.Form.PhotoShootTypeDTOForm;
 import com.alanaretratos.model.entity.PhotoShootType;
 
 import jakarta.ws.rs.PathParam;
 
 public interface PhotoShootTypeService {
 
-void createPhotoShootType(PhotoShootTypeDTO photoShootTypeDTO) throws Exception; 
+void createPhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) throws Exception; 
 	
 	void deletePhotoShootTypeFromView(@PathParam("id") Long id) throws Exception;
 	
-	void updatePhotoShootType(PhotoShootTypeDTO photoShootTypeDTO) throws Exception;
+	void updatePhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) throws Exception;
 	
 	List<PhotoShootType> listAllPhotoShootTypes();
 	

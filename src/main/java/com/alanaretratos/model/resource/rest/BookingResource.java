@@ -3,33 +3,36 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.BookingDTO;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import com.alanaretratos.model.DTO.Form.BookingDTOForm;
 import com.alanaretratos.model.entity.Booking;
 import com.alanaretratos.model.service.BookingService;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/booking")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Tag(name="Booking", description = "Booking Operations")
 public class BookingResource {
 
 	@Inject
 	BookingService bookingService;
 
 	@POST
-	public Response createBooking(BookingDTO bookingDTO) {
+	public Response createBooking(BookingDTOForm bookingDTO) {
 		try {
 			bookingService.createBooking(bookingDTO);
 		} catch (Exception e) {
@@ -62,7 +65,7 @@ public class BookingResource {
 	}
 
 	@PUT
-	public Response updateBooking(BookingDTO bookingDTO) {
+	public Response updateBooking(BookingDTOForm bookingDTO) {
 		try {
 			bookingService.updateBooking(bookingDTO);
 		} catch (Exception e) {

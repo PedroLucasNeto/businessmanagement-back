@@ -2,7 +2,9 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.ClientDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.ClientDTOForm;
 import com.alanaretratos.model.entity.Client;
 import com.alanaretratos.model.repository.ClientRepository;
 import com.alanaretratos.model.service.ClientService;
@@ -17,20 +19,12 @@ public class ClientServiceImpl implements ClientService {
 	ClientRepository clientRepository;
 
 	@Override
-	public void createClient(ClientDTO clientDTO) throws Exception {
-		Client client = clientRepository.findById(clientDTO.getId());
-		if (client.equals(null)) {
-			client.setDateOfBirth(clientDTO.getDateOfBirth());
-			client.setEmail(clientDTO.getEmail());
-			client.setInstagram(clientDTO.getInstagram());
-			client.setName(clientDTO.getName());
-			client.setObservation(clientDTO.getObservation());
-			client.setPhone(clientDTO.getPhone());
+	public void createClient(ClientDTOForm clientDTO) throws Exception {
+		Client client = new Client();
 
-			client.persist();
-		} else {
-			throw new Exception("Couldn't create this Client");
-		}
+		BeanUtils.copyProperties(client, clientDTO);
+
+		client.persist();
 
 	}
 
@@ -47,14 +41,10 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void updateClient(ClientDTO clientDTO) throws Exception {
-		Client client = clientRepository.findByIdOptional(clientDTO.getId()).orElseThrow();
-		client.setDateOfBirth(clientDTO.getDateOfBirth());
-		client.setEmail(clientDTO.getEmail());
-		client.setInstagram(clientDTO.getInstagram());
-		client.setName(clientDTO.getName());
-		client.setObservation(clientDTO.getObservation());
-		client.setPhone(clientDTO.getPhone());
+	public void updateClient(ClientDTOForm clientDTO) throws Exception {
+		Client client = clientRepository.findByIdOptional((long) 1).orElseThrow();
+		
+		BeanUtils.copyProperties(clientDTO, client);
 
 		client.persist();
 

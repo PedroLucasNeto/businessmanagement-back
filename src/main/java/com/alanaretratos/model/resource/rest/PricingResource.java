@@ -3,7 +3,9 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.PricingDTO;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
+import com.alanaretratos.model.DTO.Form.PricingDTOForm;
 import com.alanaretratos.model.entity.Pricing;
 import com.alanaretratos.model.service.PricingService;
 
@@ -19,17 +21,20 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import lombok.Data;
 
 @Path("/pricing")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Tag(name="Pacotes", description = "Operações referentes aos pacotes")
+@Data
 public class PricingResource {
 
 	@Inject
 	PricingService pricingService;
 
 	@POST
-	public Response createPricing(PricingDTO pricingDTO) {
+	public Response createPricing(PricingDTOForm pricingDTO) {
 		try {
 			pricingService.createPricing(pricingDTO);
 		} catch (Exception e) {
@@ -62,7 +67,7 @@ public class PricingResource {
 	}
 
 	@PUT
-	public Response updatePricing(PricingDTO pricingDTO) {
+	public Response updatePricing(PricingDTOForm pricingDTO) {
 		try {
 			pricingService.updatePricing(pricingDTO);
 		} catch (Exception e) {

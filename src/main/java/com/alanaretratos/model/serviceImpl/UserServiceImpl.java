@@ -2,7 +2,9 @@ package com.alanaretratos.model.serviceImpl;
 
 import java.util.List;
 
-import com.alanaretratos.model.DTO.UserDTO;
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.alanaretratos.model.DTO.Form.UserDTOForm;
 import com.alanaretratos.model.entity.User;
 import com.alanaretratos.model.repository.UserRepository;
 import com.alanaretratos.model.service.UserService;
@@ -17,17 +19,11 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	@Override
-	public void createUser(UserDTO userDTO) throws Exception {
-		User user = userRepository.findById(userDTO.getId());
-		if (user.equals(null)) {
-			user.setEmail(userDTO.getEmail());
-			user.setName(userDTO.getName());
-			user.setPassword(userDTO.getPassword());
-
+	public void createUser(UserDTOForm userDTO) throws Exception {
+		User user = new User();
+		
+		BeanUtils.copyProperties(user, userDTO);
 			user.persist();
-		} else {
-			throw new Exception("Couldn't create this User");
-		}
 
 	}
 
@@ -44,11 +40,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserDTO userDTO) throws Exception {
-		User user = userRepository.findByIdOptional(userDTO.getId()).orElseThrow();
-		user.setEmail(userDTO.getEmail());
-		user.setName(userDTO.getName());
+	public void updateUser(UserDTOForm userDTO) throws Exception {
+		User user = userRepository.findByIdOptional((long) 1).orElseThrow();
 
+		BeanUtils.copyProperties(userDTO, user);
 		user.persist();
 
 	}
