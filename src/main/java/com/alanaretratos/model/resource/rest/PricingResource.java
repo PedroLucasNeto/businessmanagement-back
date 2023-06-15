@@ -23,7 +23,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import lombok.Data;
 
-@Path("/pricing")
+@Path("/pricings")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Tag(name="Pacotes", description = "Operações referentes aos pacotes")
@@ -78,9 +78,9 @@ public class PricingResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deletePricingView(Long id) {
+	public Response deletePricingView(@PathParam(value = "id") Long id) {
 		try {
-			pricingService.getPricingById(id);
+			pricingService.deletePricingFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -89,9 +89,9 @@ public class PricingResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deletePricingDB(Long id) {
+	public Response deletePricingDB(@PathParam(value = "id") Long id) {
 		try {
-			pricingService.getPricingById(id);
+			pricingService.deletePricingFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

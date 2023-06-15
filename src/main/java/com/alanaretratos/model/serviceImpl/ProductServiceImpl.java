@@ -6,7 +6,6 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import com.alanaretratos.model.DTO.Form.ProductDTOForm;
 import com.alanaretratos.model.entity.Product;
-import com.alanaretratos.model.repository.PricingRepository;
 import com.alanaretratos.model.repository.ProductRepository;
 import com.alanaretratos.model.service.ProductService;
 import com.alanaretratos.model.utils.UtilConstants;
@@ -32,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> listAllProducts() {
-		return productRepository.findAllActivated();
+		return productRepository.findAllActive();
 	}
 
 	@Override
@@ -52,8 +51,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public void deleteProductFromDB(Long id) throws Exception {
-		Product product = productRepository.findByIdOptional(id).orElseThrow();
-		productRepository.delete(product);
+//		Product product = productRepository.findByIdOptional(id).orElseThrow();
+		productRepository.deleteById(id);
 	}
 
 	@Override
@@ -61,7 +60,6 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findByIdOptional(id).orElseThrow();
 		product.setStatus(UtilConstants.STATUS_DEACTIVATED);
 		product.persist();
-
 	}
 
 }

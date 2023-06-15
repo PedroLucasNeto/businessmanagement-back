@@ -1,6 +1,5 @@
 package com.alanaretratos.model.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,13 +38,13 @@ public class Booking extends PanacheEntityBase {
 	private Budget budget;
 
 	@Column
-	private Date bookedDate;
+	private String bookedString;
 
 	@Column
-	private Date deliveryDate;
+	private String deliveryString;
 
 	@Column
-	private Date photoShootDate;
+	private String photoShootString;
 
 	@Column
 	private boolean extraPhoto;
@@ -61,14 +60,17 @@ public class Booking extends PanacheEntityBase {
 
 	@Column
 	private Double subTotal;
-	
+
+	@Column
+	private String notes;
+
 	@Column
 	private Double totalPrice;
 
 	private boolean status;
-	
-	  @PrePersist
-	    public void prePersist() {
-	        this.status = UtilConstants.STATUS_ACTIVATED; 
-	    }
+
+	@PrePersist
+	public void prePersist() {
+		this.status = UtilConstants.STATUS_ACTIVATED;
+	}
 }

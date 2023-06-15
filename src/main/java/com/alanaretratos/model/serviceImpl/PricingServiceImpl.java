@@ -62,7 +62,6 @@ public class PricingServiceImpl implements PricingService {
 		Pricing pricing = pricingRepository.findByIdOptional(id).orElseThrow();
 		pricing.setStatus(UtilConstants.STATUS_DEACTIVATED);
 		pricing.persist();
-
 	}
 
 }

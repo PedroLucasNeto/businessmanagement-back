@@ -1,9 +1,6 @@
 package com.alanaretratos.model.DTO.Form;
 
-import java.util.Date;
-
-import com.alanaretratos.model.entity.Client;
-import com.alanaretratos.model.entity.PhotoShootType;
+import com.alanaretratos.model.entity.Category;
 import com.alanaretratos.model.entity.Pricing;
 
 import lombok.Data;
@@ -11,12 +8,14 @@ import lombok.Data;
 @Data
 public class BudgetDTOForm {
 
-	private Client client;
+	private ClientDTOForm client;
 
-	private PhotoShootType photoShootType;
+	private Category category;
 
 	private Pricing pricing;
 
-	private Date firstContactDate;
+	private String firstContactDate;
+
+	private String notes;
 
 }

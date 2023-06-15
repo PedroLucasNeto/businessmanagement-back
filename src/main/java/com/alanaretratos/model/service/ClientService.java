@@ -20,4 +20,5 @@ public interface ClientService {
 	Client getClientById(Long id);
 
 	void deleteClientFromDB(Long id) throws Exception;
+	
 }

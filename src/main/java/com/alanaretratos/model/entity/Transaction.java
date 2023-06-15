@@ -50,6 +50,9 @@ public class Transaction extends PanacheEntityBase {
 	@Column
 	private TransactionType transactionType;
 	
+	@Column
+	private String notes;
+	
 	private boolean status;
 	
 	  @PrePersist

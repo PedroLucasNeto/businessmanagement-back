@@ -11,7 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class ProductRepository implements PanacheRepository<Product> {
 
-	public List<Product> findAllActivated() {
+	public List<Product> findAllActive() {
 		ArrayList<Product> returnList = new ArrayList<>();
 
 		for (Product product : listAll()) {

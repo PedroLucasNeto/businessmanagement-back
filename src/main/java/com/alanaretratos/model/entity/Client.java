@@ -1,7 +1,5 @@
 package com.alanaretratos.model.entity;
 
-import java.util.Date;
-
 import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -20,36 +18,36 @@ import lombok.EqualsAndHashCode;
 @Cacheable
 @Data
 @Table(name = "tb_client")
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class Client extends PanacheEntityBase {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String phone;
-	
+
 	@Column
-	private Date dateOfBirth;
-	
+	private String dateOfBirth;
+
 	@Column
 	private String instagram;
-	
+
 	@Column
 	private String email;
-	
+
 	@Column
-	private String observation;
-	
+	private String notes;
+
 	private boolean status;
-	
-	  @PrePersist
-	    public void prePersist() {
-	        this.status = UtilConstants.STATUS_ACTIVATED; 
-	    }
+
+	@PrePersist
+	public void prePersist() {
+		this.status = UtilConstants.STATUS_ACTIVATED;
+	}
 
 }

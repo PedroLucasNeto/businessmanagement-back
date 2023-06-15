@@ -25,7 +25,6 @@ public class BookingServiceImpl implements BookingService {
 		BeanUtils.copyProperties(booking, bookingDTO);
 
 		booking.persist();
-
 	}
 
 	@Override

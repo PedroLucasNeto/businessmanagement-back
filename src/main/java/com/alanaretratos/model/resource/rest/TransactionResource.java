@@ -20,7 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/transaction")
+@Path("/transactions")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TransactionResource {
@@ -73,9 +73,9 @@ public class TransactionResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deleteTransactionView(Long id) {
+	public Response deleteTransactionView(@PathParam(value = "id")Long id) {
 		try {
-			transactionService.getTransactionById(id);
+			transactionService.deleteTransactionFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -84,9 +84,9 @@ public class TransactionResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deleteTransactionDB(Long id) {
+	public Response deleteTransactionDB(@PathParam(value = "id")Long id) {
 		try {
-			transactionService.getTransactionById(id);
+			transactionService.deleteTransactionFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

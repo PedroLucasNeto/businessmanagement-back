@@ -23,7 +23,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import lombok.Data;
 
-@Path("/product")
+@Path("/products")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Tag(name="Produtos", description = "Operações referentes aos produtos")
@@ -58,11 +58,7 @@ public class ProductResource {
 	@GET
 	public Response listProduct() {
 		List<Product>product = new ArrayList<>();
-		try {
 			 product = productService.listAllProducts();
-		} catch (Exception e) {
-			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
-		}
 		return Response.ok(product).build();
 	}
 
@@ -79,9 +75,9 @@ public class ProductResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deleteProductView(Long id) {
+	public Response deleteProduct(@PathParam(value = "id") Long id ) {
 		try {
-			productService.getProductById(id);
+			productService.deleteProductFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -90,9 +86,9 @@ public class ProductResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deleteProductDB(Long id) {
+	public Response deleteProductDB(@PathParam(value = "id") Long id) {
 		try {
-			productService.getProductById(id);
+			productService.deleteProductFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

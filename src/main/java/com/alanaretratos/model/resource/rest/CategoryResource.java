@@ -3,9 +3,9 @@ package com.alanaretratos.model.resource.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alanaretratos.model.DTO.Form.PhotoShootTypeDTOForm;
-import com.alanaretratos.model.entity.PhotoShootType;
-import com.alanaretratos.model.service.PhotoShootTypeService;
+import com.alanaretratos.model.DTO.Form.CategoryDTOForm;
+import com.alanaretratos.model.entity.Category;
+import com.alanaretratos.model.service.CategoryService;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -19,19 +19,21 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
+import lombok.Data;
 
-@Path("/photoshoottype")
+@Path("/categories")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class PhotoShootTypeResource {
+@Data
+public class CategoryResource {
 	
 	@Inject
-	PhotoShootTypeService photoShootTypeService;
+	CategoryService categoryService;
 	
 	@POST
-	public Response createPhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) {
+	public Response createCategory(CategoryDTOForm categoryDTO) {
 		try {
-			photoShootTypeService.createPhotoShootType(photoShootTypeDTO);
+			categoryService.createCategory(categoryDTO);
 		} catch (Exception e) {
 			return Response.status(Status.NOT_ACCEPTABLE.getStatusCode()).build();
 		}
@@ -40,31 +42,31 @@ public class PhotoShootTypeResource {
 
 	@GET
 	@Path("{id}")
-	public Response getPhotoShootTypeById(@PathParam("id") Long id) {
-		PhotoShootType photoShootType = new PhotoShootType();
+	public Response getCategoryById(@PathParam("id") Long id) {
+		Category category = new Category();
 		try {
-			 photoShootType = photoShootTypeService.getPhotoShootTypeById(id);
+			 category = categoryService.getCategoryById(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
-		return Response.ok(photoShootType).build();
+		return Response.ok(category).build();
 	}
 	
 	@GET
-	public Response listPhotoShootType() {
-		List<PhotoShootType>photoShootType = new ArrayList<>();
+	public Response listCategory() {
+		List<Category>category = new ArrayList<>();
 		try {
-			 photoShootType = photoShootTypeService.listAllPhotoShootTypes();
+			 category = categoryService.listAllCategories();
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
-		return Response.ok(photoShootType).build();
+		return Response.ok(category).build();
 	}
 
 	@PUT
-	public Response updatePhotoShootType(PhotoShootTypeDTOForm photoShootTypeDTO) {
+	public Response updateCategory(CategoryDTOForm categoryDTO) {
 		try {
-			photoShootTypeService.updatePhotoShootType(photoShootTypeDTO);
+			categoryService.updateCategory(categoryDTO);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -73,9 +75,9 @@ public class PhotoShootTypeResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deletePhotoShootTypeView(Long id) {
+	public Response deleteCategoryView(@PathParam(value = "id")Long id) {
 		try {
-			photoShootTypeService.getPhotoShootTypeById(id);
+			categoryService.deleteCategoryFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -84,9 +86,9 @@ public class PhotoShootTypeResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deletePhotoShootTypeDB(Long id) {
+	public Response deleteCategoryDB(@PathParam(value = "id")Long id) {
 		try {
-			photoShootTypeService.getPhotoShootTypeById(id);
+			categoryService.deleteCategoryFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

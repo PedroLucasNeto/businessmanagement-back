@@ -6,6 +6,7 @@ import java.util.Set;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Product;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import lombok.Data;
 
 @Data
@@ -14,12 +15,12 @@ public class BookingDTOForm {
 	private Set<Product> products;
 
 	private Budget budget;
-
-	private Date bookedDate;
-
-	private Date deliveryDate;
-
-	private Date photoShootDate;
+	
+	private String bookedDate;
+	
+	private String deliveryDate;
+	
+	private String photoShootDate;
 
 	private boolean extraPhoto;
 
@@ -30,4 +31,6 @@ public class BookingDTOForm {
 	private boolean paidProduct;
 
 	private Double totalPrice;
+	
+	private String notes;
 }

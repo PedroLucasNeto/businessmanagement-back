@@ -3,6 +3,7 @@ package com.alanaretratos.model.service;
 import java.util.List;
 
 import com.alanaretratos.model.DTO.Form.BudgetDTOForm;
+import com.alanaretratos.model.DTO.View.BudgetDTOView;
 import com.alanaretratos.model.entity.Budget;
 
 import jakarta.ws.rs.PathParam;
@@ -15,7 +16,7 @@ public interface BudgetService {
 
 	void updateBudget(BudgetDTOForm budgetDTO) throws Exception;
 
-	List<Budget> listAllBudgets();
+	List<BudgetDTOView> listAllBudgets();
 
 	Budget getBudgetById(Long id);
 

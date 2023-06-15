@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alanaretratos.model.DTO.Form.BudgetDTOForm;
+import com.alanaretratos.model.DTO.View.BudgetDTOView;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.service.BudgetService;
 
@@ -20,7 +21,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/budget")
+@Path("/budgets")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BudgetResource {
@@ -33,6 +34,7 @@ public class BudgetResource {
 		try {
 			budgetService.createBudget(budgetDTO);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return Response.status(Status.NOT_ACCEPTABLE.getStatusCode()).build();
 		}
 		return Response.status(Status.CREATED.getStatusCode()).build();
@@ -52,13 +54,13 @@ public class BudgetResource {
 
 	@GET
 	public Response listBudget() {
-		List<Budget> budget = new ArrayList<>();
+		List<BudgetDTOView> budgets = new ArrayList<>();
 		try {
-			budget = budgetService.listAllBudgets();
+			budgets = budgetService.listAllBudgets();
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
-		return Response.ok(budget).build();
+		return Response.ok(budgets).build();
 	}
 
 	@PUT
@@ -73,9 +75,9 @@ public class BudgetResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deleteBudgetView(Long id) {
+	public Response deleteBudgetView(@PathParam(value = "id")Long id) {
 		try {
-			budgetService.getBudgetById(id);
+			budgetService.deleteBudgetFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -84,9 +86,9 @@ public class BudgetResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deleteBudgetDB(Long id) {
+	public Response deleteBudgetDB(@PathParam(value = "id")Long id) {
 		try {
-			budgetService.getBudgetById(id);
+			budgetService.deleteBudgetFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

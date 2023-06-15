@@ -17,22 +17,22 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Cacheable
 @Data
-@Table(name = "tb_photoshoottype")
-@EqualsAndHashCode(callSuper=false)
-public class PhotoShootType extends PanacheEntityBase {
+@Table(name = "tb_category")
+@EqualsAndHashCode(callSuper = false)
+public class Category extends PanacheEntityBase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String description;
-	
+
 	private boolean status;
-	
-	  @PrePersist
-	    public void prePersist() {
-	        this.status = UtilConstants.STATUS_ACTIVATED; 
-	    }
+
+	@PrePersist
+	public void prePersist() {
+		this.status = UtilConstants.STATUS_ACTIVATED;
+	}
 
 }

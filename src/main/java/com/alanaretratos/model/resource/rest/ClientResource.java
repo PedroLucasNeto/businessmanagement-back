@@ -20,7 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-@Path("/")
+@Path("/clients")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ClientResource {
@@ -73,9 +73,9 @@ public class ClientResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deleteClientView(Long id) {
+	public Response deleteClientView(@PathParam(value = "id")Long id) {
 		try {
-			clientService.getClientById(id);
+			clientService.deleteClientFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -84,9 +84,9 @@ public class ClientResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deleteClientDB(Long id) {
+	public Response deleteClientDB(@PathParam(value = "id")Long id) {
 		try {
-			clientService.getClientById(id);
+			clientService.deleteClientFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}

@@ -1,7 +1,5 @@
 package com.alanaretratos.model.entity;
 
-import java.util.Date;
-
 import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -33,25 +31,25 @@ public class Budget extends PanacheEntityBase {
 	private Client client;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private PhotoShootType photoShootType;
+	private Category category;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Pricing pricing;
 
 	@Column
-	private Date firstContactDate;
+	private String firstContactDate;
+
+	@Column(nullable = true)
+	private String updateDate;
 
 	@Column
-	private Date updateDate;
-	
-	@Column
-	private String description;
+	private String notes;
 
 	private boolean status;
-	
-	  @PrePersist
-	    public void prePersist() {
-	        this.status = UtilConstants.STATUS_ACTIVATED; 
-	    }
+
+	@PrePersist
+	public void prePersist() {
+		this.status = UtilConstants.STATUS_ACTIVATED;
+	}
 
 }

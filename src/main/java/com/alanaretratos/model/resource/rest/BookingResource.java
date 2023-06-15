@@ -22,7 +22,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/booking")
+@Path("/bookings")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Tag(name="Booking", description = "Booking Operations")
@@ -76,9 +76,9 @@ public class BookingResource {
 
 	@DELETE
 	@Path("{id}")
-	public Response deleteBookingView(Long id) {
+	public Response deleteBookingView(@PathParam(value = "id")Long id) {
 		try {
-			bookingService.getBookingById(id);
+			bookingService.deleteBookingFromView(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
@@ -87,9 +87,9 @@ public class BookingResource {
 
 	@DELETE
 	@Path("/fromdb/{id}")
-	public Response deleteBookingDB(Long id) {
+	public Response deleteBookingDB(@PathParam(value = "id")Long id) {
 		try {
-			bookingService.getBookingById(id);
+			bookingService.deleteBookingFromDB(id);
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST.getStatusCode()).build();
 		}
