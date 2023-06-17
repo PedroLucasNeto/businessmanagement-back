@@ -1,6 +1,9 @@
 package com.alanaretratos.model.entity;
 
+import java.time.Instant;
+
 import com.alanaretratos.model.utils.UtilConstants;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
@@ -32,7 +35,8 @@ public class Client extends PanacheEntityBase {
 	private String phone;
 
 	@Column
-	private String dateOfBirth;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant dateOfBirth;
 
 	@Column
 	private String instagram;

@@ -23,5 +23,9 @@ public class ClientRepository implements PanacheRepository<Client> {
 		return returnList;
 
 	}
+	
+	public Client findByPhone(String phone) {
+        return find("phone", phone).firstResult();
+    }
 
 }

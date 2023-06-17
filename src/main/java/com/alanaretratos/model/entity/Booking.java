@@ -1,9 +1,11 @@
 package com.alanaretratos.model.entity;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.alanaretratos.model.utils.UtilConstants;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
@@ -38,13 +40,16 @@ public class Booking extends PanacheEntityBase {
 	private Budget budget;
 
 	@Column
-	private String bookedString;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant bookedDate;
 
 	@Column
-	private String deliveryString;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant deliveryDate;
 
 	@Column
-	private String photoShootString;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant photoShootDate;
 
 	@Column
 	private boolean extraPhoto;

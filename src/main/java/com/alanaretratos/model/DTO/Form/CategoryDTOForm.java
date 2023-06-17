@@ -1,15 +1,10 @@
 package com.alanaretratos.model.DTO.Form;
 
+import lombok.Data;
+
+@Data
 public class CategoryDTOForm {
 	
 	private String description;
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 }

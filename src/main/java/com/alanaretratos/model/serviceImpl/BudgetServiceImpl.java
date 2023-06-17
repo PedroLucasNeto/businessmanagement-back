@@ -43,13 +43,15 @@ public class BudgetServiceImpl implements BudgetService {
 		Budget budget = new Budget();
 
 		Client client = new Client();
-		BeanUtils.copyProperties(client, budgetDTO.getClient());
-		
-		clientRepository.persist(client);
-		
-		Pricing pricing = pricingRepository.findById(budgetDTO.getCategory().getId());
-		
-		Category category = categoryRepository.findById(budgetDTO.getPricing().getId());
+		client = clientRepository.findByPhone(budgetDTO.getClient().getPhone());
+		if(client==null) {
+			BeanUtils.copyProperties(client, budgetDTO.getClient());
+			clientRepository.persist(client);
+		}
+
+		Pricing pricing = pricingRepository.findById(budgetDTO.getPricingId());
+
+		Category category = categoryRepository.findById(budgetDTO.getCategoryId());
 
 		budget.setPricing(pricing);
 		budget.setClient(client);
@@ -74,27 +76,27 @@ public class BudgetServiceImpl implements BudgetService {
 
 		for (Budget budget : budgets) {
 
-				BudgetDTOView budgetDTO = new BudgetDTOView();
-				
-				budgetDTO.setId(budget.getId());
-				budgetDTO.setDateOfBirth(budget.getClient().getDateOfBirth());
-				budgetDTO.setEmail(budget.getClient().getEmail());
-				budgetDTO.setInstagram(budget.getClient().getInstagram());
-				budgetDTO.setName(budget.getClient().getName());
-				budgetDTO.setPhone(budget.getClient().getPhone());
-				budgetDTO.setFirstContactDate(budget.getFirstContactDate());
-				budgetDTO.setNotes(budget.getNotes());
-				if(budget.getCategory()!=null) {					
-					budgetDTO.setCategoryDescription(budget.getCategory().getDescription());
-				}
-				budgetDTO.setCategoryDescription(null);
-				if(budget.getPricing()!=null) {					
-					budgetDTO.setPricingDescription(budget.getPricing().getDescription());
-				}
-				budgetDTO.setPricingDescription(null);
-				budgetDTO.setUpdateDate(budget.getUpdateDate());
-				
-				budgetsDTO.add(budgetDTO);
+			BudgetDTOView budgetDTO = new BudgetDTOView();
+
+			budgetDTO.setId(budget.getId());
+			budgetDTO.setDateOfBirth(budget.getClient().getDateOfBirth());
+			budgetDTO.setEmail(budget.getClient().getEmail());
+			budgetDTO.setInstagram(budget.getClient().getInstagram());
+			budgetDTO.setName(budget.getClient().getName());
+			budgetDTO.setPhone(budget.getClient().getPhone());
+			budgetDTO.setFirstContactDate(budget.getFirstContactDate());
+			budgetDTO.setNotes(budget.getNotes());
+			if (budget.getCategory() != null) {
+				budgetDTO.setCategoryDescription(budget.getCategory().getDescription());
+			}
+			budgetDTO.setCategoryDescription(null);
+			if (budget.getPricing() != null) {
+				budgetDTO.setPricingDescription(budget.getPricing().getDescription());
+			}
+			budgetDTO.setPricingDescription(null);
+			budgetDTO.setUpdateDate(budget.getUpdateDate());
+
+			budgetsDTO.add(budgetDTO);
 		}
 
 		return budgetsDTO;

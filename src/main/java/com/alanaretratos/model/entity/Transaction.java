@@ -1,6 +1,6 @@
 package com.alanaretratos.model.entity;
 
-import java.util.Date;
+import java.time.Instant;
 
 import com.alanaretratos.model.enums.TransactionType;
 import com.alanaretratos.model.utils.UtilConstants;
@@ -39,10 +39,10 @@ public class Transaction extends PanacheEntityBase {
 	private String amount;
 	
 	@Column
-	private Date transactionDate;
+	private Instant transactionDate;
 	
 	@Column
-	private Date paymentDate;
+	private Instant paymentDate;
 	
 	@Column
 	private String origin;

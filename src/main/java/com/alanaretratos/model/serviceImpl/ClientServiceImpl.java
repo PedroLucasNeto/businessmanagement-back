@@ -12,6 +12,7 @@ import com.alanaretratos.model.utils.UtilConstants;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class ClientServiceImpl implements ClientService {
 
@@ -19,12 +20,13 @@ public class ClientServiceImpl implements ClientService {
 	ClientRepository clientRepository;
 
 	@Override
+	@Transactional
 	public void createClient(ClientDTOForm clientDTO) throws Exception {
 		Client client = new Client();
 
 		BeanUtils.copyProperties(client, clientDTO);
 
-		client.persist();
+		clientRepository.persist(client);
 
 	}
 

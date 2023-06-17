@@ -1,12 +1,12 @@
 package com.alanaretratos.model.DTO.Form;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Set;
 
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Product;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
 import lombok.Data;
 
 @Data
@@ -16,11 +16,14 @@ public class BookingDTOForm {
 
 	private Budget budget;
 	
-	private String bookedDate;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant bookedDate;
 	
-	private String deliveryDate;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant deliveryDate;
 	
-	private String photoShootDate;
+	@JsonFormat(pattern = "dd-MM-yyyy")
+	private Instant photoShootDate;
 
 	private boolean extraPhoto;
 
