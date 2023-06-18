@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.alanaretratos.model.DTO.Form.BudgetDTOForm;
+import com.alanaretratos.model.DTO.Form.ClientDTOForm;
 import com.alanaretratos.model.DTO.View.BudgetDTOView;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Category;
@@ -42,10 +43,14 @@ public class BudgetServiceImpl implements BudgetService {
 	public void createBudget(BudgetDTOForm budgetDTO) throws Exception {
 		Budget budget = new Budget();
 
-		Client client = new Client();
+		Client client;
+		ClientDTOForm dto = budgetDTO.getClient();
+
 		client = clientRepository.findByPhone(budgetDTO.getClient().getPhone());
-		if(client==null) {
-			BeanUtils.copyProperties(client, budgetDTO.getClient());
+
+		if (client == null) {
+			client = new Client();
+			BeanUtils.copyProperties(client, dto);
 			clientRepository.persist(client);
 		}
 
@@ -86,14 +91,15 @@ public class BudgetServiceImpl implements BudgetService {
 			budgetDTO.setPhone(budget.getClient().getPhone());
 			budgetDTO.setFirstContactDate(budget.getFirstContactDate());
 			budgetDTO.setNotes(budget.getNotes());
+			budgetDTO.setCategoryDescription(null);
+			budgetDTO.setPricingDescription(null);
 			if (budget.getCategory() != null) {
 				budgetDTO.setCategoryDescription(budget.getCategory().getDescription());
 			}
-			budgetDTO.setCategoryDescription(null);
 			if (budget.getPricing() != null) {
 				budgetDTO.setPricingDescription(budget.getPricing().getDescription());
 			}
-			budgetDTO.setPricingDescription(null);
+
 			budgetDTO.setUpdateDate(budget.getUpdateDate());
 
 			budgetsDTO.add(budgetDTO);
@@ -117,6 +123,7 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
+	@Transactional
 	public void updateBudget(BudgetDTOForm budgetDTO) throws Exception {
 		// TODO arrumar o metodo
 		Budget budget = budgetRepository.findByIdOptional((long) 1).orElseThrow();
@@ -127,14 +134,16 @@ public class BudgetServiceImpl implements BudgetService {
 	}
 
 	@Override
-	public void deleteBudgetFromView(Long id) throws Exception {
+	@Transactional
+	public void deleteBudgetFromDB(Long id) throws Exception {
 		Budget budget = budgetRepository.findByIdOptional(id).orElseThrow();
 
 		budgetRepository.delete(budget);
 	}
 
 	@Override
-	public void deleteBudgetFromDB(Long id) throws Exception {
+	@Transactional
+	public void deleteBudgetFromView(Long id) throws Exception {
 		Budget budget = budgetRepository.findByIdOptional(id).orElseThrow();
 		budget.setStatus(UtilConstants.STATUS_DEACTIVATED);
 

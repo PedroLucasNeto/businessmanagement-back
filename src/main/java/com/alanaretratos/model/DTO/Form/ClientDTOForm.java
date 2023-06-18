@@ -1,8 +1,6 @@
 package com.alanaretratos.model.DTO.Form;
 
-import java.time.Instant;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -13,8 +11,7 @@ public class ClientDTOForm {
 
 	private String phone;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant dateOfBirth;
+	private LocalDate dateOfBirth;
 
 	private String instagram;
 

@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public void deleteProductFromDB(Long id) throws Exception {
-//		Product product = productRepository.findByIdOptional(id).orElseThrow();
+		Product product = productRepository.findByIdOptional(id).orElseThrow();
 		productRepository.deleteById(id);
 	}
 

@@ -1,8 +1,6 @@
 package com.alanaretratos.model.DTO.Form;
 
-import java.time.Instant;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -15,8 +13,7 @@ public class BudgetDTOForm {
 
 	private Long pricingId;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant firstContactDate;
+	private LocalDate firstContactDate;
 
 	private String notes;
 

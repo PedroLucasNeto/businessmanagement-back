@@ -1,6 +1,6 @@
 package com.alanaretratos.model.entity;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 import com.alanaretratos.model.enums.TransactionType;
 import com.alanaretratos.model.utils.UtilConstants;
@@ -23,42 +23,41 @@ import lombok.EqualsAndHashCode;
 @Cacheable
 @Data
 @Table(name = "tb_transaction")
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class Transaction extends PanacheEntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String description;
-	
-	@OneToOne(cascade= CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Client client;
-	
+
 	@Column
 	private String amount;
-	
+
 	@Column
-	private Instant transactionDate;
-	
+	private LocalDate transactionDate;
+
 	@Column
-	private Instant paymentDate;
-	
+	private LocalDate paymentDate;
+
 	@Column
 	private String origin;
-	
+
 	@Column
 	private TransactionType transactionType;
-	
+
 	@Column
 	private String notes;
-	
-	private boolean status;
-	
-	  @PrePersist
-	    public void prePersist() {
-	        this.status = UtilConstants.STATUS_ACTIVATED; 
-	    }
-	
-}
 
+	private boolean status;
+
+	@PrePersist
+	public void prePersist() {
+		this.status = UtilConstants.STATUS_ACTIVATED;
+	}
+
+}

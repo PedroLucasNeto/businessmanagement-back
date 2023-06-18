@@ -1,19 +1,17 @@
 package com.alanaretratos.model.entity;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 import com.alanaretratos.model.utils.UtilConstants;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,22 +28,20 @@ public class Budget extends PanacheEntityBase {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Client client;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Category category;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Pricing pricing;
 
 	@Column
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant firstContactDate;
+	private LocalDate firstContactDate;
 
 	@Column(nullable = true)
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant updateDate;
+	private LocalDate updateDate;
 
 	@Column
 	private String notes;

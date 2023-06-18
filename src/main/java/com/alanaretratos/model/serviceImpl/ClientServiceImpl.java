@@ -53,6 +53,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteClientFromDB(Long id) throws Exception {
 		Client client = clientRepository.findByIdOptional(id).orElseThrow();
 
@@ -61,6 +62,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteClientFromView(Long id) throws Exception {
 		Client client = clientRepository.findByIdOptional(id).orElseThrow();
 		client.setStatus(UtilConstants.STATUS_DEACTIVATED);

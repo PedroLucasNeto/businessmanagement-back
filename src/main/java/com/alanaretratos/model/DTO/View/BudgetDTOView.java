@@ -1,8 +1,6 @@
 package com.alanaretratos.model.DTO.View;
 
-import java.time.Instant;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -17,14 +15,11 @@ public class BudgetDTOView {
 
 	private String notes;
 	
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant  firstContactDate;
+	private LocalDate firstContactDate;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant updateDate;
+	private LocalDate updateDate;
 
-	@JsonFormat(pattern = "dd-MM-yyyy")
-	private Instant dateOfBirth;
+	private LocalDate dateOfBirth;
 
 	private String instagram;
 
