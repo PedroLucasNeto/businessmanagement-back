@@ -3,6 +3,7 @@ package com.alanaretratos.model.service;
 import java.util.List;
 
 import com.alanaretratos.model.DTO.Form.BookingDTOForm;
+import com.alanaretratos.model.DTO.View.BookingDTOView;
 import com.alanaretratos.model.entity.Booking;
 
 import jakarta.ws.rs.PathParam;
@@ -11,7 +12,7 @@ public interface BookingService {
 
 	void createBooking(BookingDTOForm bookingDTO) throws Exception;
 
-	List<Booking> listAllBookings();
+	List<BookingDTOView> listAllBookings();
 
 	Booking getBookingById(Long id);
 

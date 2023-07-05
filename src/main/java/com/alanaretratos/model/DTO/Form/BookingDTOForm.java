@@ -3,7 +3,6 @@ package com.alanaretratos.model.DTO.Form;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Product;
 
 import lombok.Data;
@@ -13,7 +12,11 @@ public class BookingDTOForm {
 	
 	private Set<Product> products;
 
-	private Budget budget;
+	private Long budgetId;
+	
+	private Long pricingId;
+	
+	private Long categoryId;
 	
 	private LocalDate bookedDate;
 	

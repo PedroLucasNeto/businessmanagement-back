@@ -14,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -37,6 +38,12 @@ public class Booking extends PanacheEntityBase {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Budget budget;
+	
+	@ManyToOne
+	private Pricing pricing;
+
+	@ManyToOne
+	private Category category;
 
 	@Column
 	private LocalDate bookedDate;
@@ -58,9 +65,6 @@ public class Booking extends PanacheEntityBase {
 
 	@Column
 	private boolean paidProduct;
-
-	@Column
-	private Double subTotal;
 
 	@Column
 	private String notes;

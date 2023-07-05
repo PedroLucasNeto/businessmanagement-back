@@ -9,24 +9,24 @@ public class BudgetDTOView {
 	
 	private Long id;
 
-	private String name;
+	private String clientName;
 
-	private String phone;
+	private String clientPhone;
 
-	private String notes;
+	private LocalDate clientDateOfBirth;
+	
+	private String clientInstagram;
+	
+	private String clientEmail;
 	
 	private LocalDate firstContactDate;
 
 	private LocalDate updateDate;
-
-	private LocalDate dateOfBirth;
-
-	private String instagram;
-
-	private String email;
 	
 	private String categoryDescription;
 	
 	private String pricingDescription;
+	
+	private String notes;
 
 }

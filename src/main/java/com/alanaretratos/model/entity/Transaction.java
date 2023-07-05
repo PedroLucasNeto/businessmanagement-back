@@ -2,18 +2,15 @@ package com.alanaretratos.model.entity;
 
 import java.time.LocalDate;
 
-import com.alanaretratos.model.enums.TransactionType;
 import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Cacheable;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -32,8 +29,8 @@ public class Transaction extends PanacheEntityBase {
 	@Column
 	private String description;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Client client;
+	@Column
+	private Long clientId;
 
 	@Column
 	private String amount;
@@ -48,7 +45,7 @@ public class Transaction extends PanacheEntityBase {
 	private String origin;
 
 	@Column
-	private TransactionType transactionType;
+	private String transactionType;
 
 	@Column
 	private String notes;

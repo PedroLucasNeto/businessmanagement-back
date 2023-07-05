@@ -84,11 +84,11 @@ public class BudgetServiceImpl implements BudgetService {
 			BudgetDTOView budgetDTO = new BudgetDTOView();
 
 			budgetDTO.setId(budget.getId());
-			budgetDTO.setDateOfBirth(budget.getClient().getDateOfBirth());
-			budgetDTO.setEmail(budget.getClient().getEmail());
-			budgetDTO.setInstagram(budget.getClient().getInstagram());
-			budgetDTO.setName(budget.getClient().getName());
-			budgetDTO.setPhone(budget.getClient().getPhone());
+			budgetDTO.setClientDateOfBirth(budget.getClient().getDateOfBirth());
+			budgetDTO.setClientEmail(budget.getClient().getEmail());
+			budgetDTO.setClientInstagram(budget.getClient().getInstagram());
+			budgetDTO.setClientName(budget.getClient().getName());
+			budgetDTO.setClientPhone(budget.getClient().getPhone());
 			budgetDTO.setFirstContactDate(budget.getFirstContactDate());
 			budgetDTO.setNotes(budget.getNotes());
 			budgetDTO.setCategoryDescription(null);
