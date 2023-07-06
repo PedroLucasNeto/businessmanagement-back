@@ -33,7 +33,7 @@ public class Transaction extends PanacheEntityBase {
 	private Long clientId;
 
 	@Column
-	private String amount;
+	private Long amount;
 
 	@Column
 	private LocalDate transactionDate;
