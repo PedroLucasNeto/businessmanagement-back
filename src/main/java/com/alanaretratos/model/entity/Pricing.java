@@ -28,7 +28,7 @@ public class Pricing extends PanacheEntityBase {
 	private String description;
 	
 	@Column
-	private String price;
+	private Double price;
 	
 	private boolean status;
 	

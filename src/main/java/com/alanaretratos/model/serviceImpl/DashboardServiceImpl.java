@@ -26,8 +26,6 @@ public class DashboardServiceImpl implements DashboardService{
 
 	@Override
 	public double monthlyIncome() {
-		LocalDate currentDate = LocalDate.now();
-	
 		
 		return transactionRepository.monthlyIncome();
 	}
@@ -53,7 +51,8 @@ public class DashboardServiceImpl implements DashboardService{
 	@Override
 	public double monthlySalesConversion() {
 		
-		return 0;
+		return transactionRepository.monthlyIncome();
+		
 	}
 
 	@Override

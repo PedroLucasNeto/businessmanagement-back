@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.alanaretratos.model.enums.PaymentMethod;
 import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -34,7 +35,7 @@ public class Booking extends PanacheEntityBase {
 	private Long id;
 
 	@OneToMany(mappedBy = "booking")
-	private Set<BookingProducts> bookingProducts = new HashSet<>();
+	private Set<BookingProduct> bookingProducts = new HashSet<>();
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Budget budget;
@@ -55,22 +56,22 @@ public class Booking extends PanacheEntityBase {
 	private LocalDate photoShootDate;
 
 	@Column
-	private boolean extraPhoto;
-
+	private boolean halfPayment;
+	
 	@Column
-	private boolean paidExtraPhoto;
-
+	private boolean fullPayment;
+	
 	@Column
-	private boolean paidRemaining;
-
-	@Column
-	private boolean paidProduct;
+	private double otherValue;
 
 	@Column
 	private String notes;
 
 	@Column
 	private Double totalPrice;
+	
+	@Column
+	private PaymentMethod paymentMethod;
 
 	private boolean status;
 

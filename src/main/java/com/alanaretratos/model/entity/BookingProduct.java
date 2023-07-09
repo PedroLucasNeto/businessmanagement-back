@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class BookingProducts {
+public class BookingProduct {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +20,7 @@ public class BookingProducts {
 	
 	@ManyToOne
 	private Product product;
+	
+	private double quantity;
+
 }

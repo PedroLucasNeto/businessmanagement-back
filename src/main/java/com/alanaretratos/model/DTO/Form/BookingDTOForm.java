@@ -3,14 +3,15 @@ package com.alanaretratos.model.DTO.Form;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.alanaretratos.model.entity.Product;
+import com.alanaretratos.model.entity.BookingProduct;
+import com.alanaretratos.model.enums.TransactionType;
 
 import lombok.Data;
 
 @Data
 public class BookingDTOForm {
 	
-	private Set<Product> products;
+	private Set<BookingProduct> bookingProducts;
 
 	private Long budgetId;
 	
@@ -23,16 +24,14 @@ public class BookingDTOForm {
 	private LocalDate deliveryDate;
 	
 	private LocalDate photoShootDate;
-
-	private boolean extraPhoto;
-
-	private boolean paidExtraPhoto;
-
-	private boolean paidRemaining;
-
-	private boolean paidProduct;
-
-	private Double totalPrice;
 	
+	private TransactionType transactionType;
+	
+	private boolean halfPayment;
+	
+	private boolean fullPayment;
+	
+	private double otherValue;
+
 	private String notes;
 }

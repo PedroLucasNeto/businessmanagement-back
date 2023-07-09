@@ -2,10 +2,10 @@ package com.alanaretratos.model.entity;
 
 import java.time.LocalDate;
 
+import com.alanaretratos.model.enums.TransactionType;
 import com.alanaretratos.model.utils.UtilConstants;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +17,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Cacheable
 @Data
 @Table(name = "tb_transaction")
 @EqualsAndHashCode(callSuper = false)
@@ -30,10 +29,10 @@ public class Transaction extends PanacheEntityBase {
 	private String description;
 
 	@Column
-	private Long clientId;
+	private Long bookingId;
 
 	@Column
-	private Long amount;
+	private Double amount;
 
 	@Column
 	private LocalDate transactionDate;
@@ -45,7 +44,7 @@ public class Transaction extends PanacheEntityBase {
 	private String origin;
 
 	@Column
-	private String transactionType;
+	private TransactionType transactionType;
 
 	@Column
 	private String notes;

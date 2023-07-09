@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.alanaretratos.model.entity.BookingProducts;
+import com.alanaretratos.model.entity.BookingProduct;
 import com.alanaretratos.model.entity.Budget;
 import com.alanaretratos.model.entity.Category;
 import com.alanaretratos.model.entity.Pricing;
@@ -16,7 +16,7 @@ public class BookingDTOView {
 	
 	private Long id;
 
-	private Set<BookingProducts> bookingProducts = new HashSet<>();
+	private Set<BookingProduct> bookingProducts = new HashSet<>();
 
 	private Budget budget;
 	
