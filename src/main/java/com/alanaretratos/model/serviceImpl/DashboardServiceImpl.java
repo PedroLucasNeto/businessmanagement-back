@@ -60,5 +60,16 @@ public class DashboardServiceImpl implements DashboardService{
 		
 		return 0;
 	}
+	
+	@Override
+	public int monthlyBookings() {
+		return 	bookingRepository.findMonthlyBookings();
+	}
+	
+	@Override
+	public int monthlyBudgets() {
+		return budgetRepository.findMonthlyBookings();
+
+	}
 
 }

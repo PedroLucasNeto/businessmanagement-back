@@ -15,5 +15,10 @@ public interface DashboardService {
 	double monthlySalesConversion();
 	
 	double periodSalesConversion();
+	
+	int monthlyBookings();
+	
+	int monthlyBudgets();
+
 
 }

@@ -85,6 +85,39 @@ public class DashboardResource {
 	    return Response.ok(income).build();
 	}
 	
+	@GET
+	@Path("/monthlyBookings")
+	public Response monthlyBookings() {
+		
+		int bookings = 0;
+	    
+		try {
+			bookings = dashboardService.monthlyBookings();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+
+	    return Response.ok(bookings).build();
+	}
+	
+	
+	@GET
+	@Path("/monthlyBudgets")
+	public Response monthlyBudgets() {
+		
+	    int budgets = 0;
+	    
+		try {
+			budgets = dashboardService.monthlyBudgets();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+
+	    return Response.ok(budgets).build();
+	}
+	
 
 
 

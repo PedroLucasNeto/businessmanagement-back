@@ -8,6 +8,7 @@ import java.util.Set;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.alanaretratos.model.DTO.Form.BookingDTOForm;
+import com.alanaretratos.model.DTO.Form.BookingProductDTOForm;
 import com.alanaretratos.model.DTO.View.BookingDTOView;
 import com.alanaretratos.model.entity.Booking;
 import com.alanaretratos.model.entity.BookingProduct;
@@ -19,6 +20,7 @@ import com.alanaretratos.model.repository.BookingProductRepository;
 import com.alanaretratos.model.repository.BookingRepository;
 import com.alanaretratos.model.repository.BudgetRepository;
 import com.alanaretratos.model.repository.PricingRepository;
+import com.alanaretratos.model.repository.ProductRepository;
 import com.alanaretratos.model.repository.TransactionRepository;
 import com.alanaretratos.model.service.BookingService;
 import com.alanaretratos.model.utils.UtilConstants;
@@ -45,6 +47,9 @@ public class BookingServiceImpl implements BookingService {
 	@Inject
 	BookingProductRepository bookingProductRepository;
 
+	@Inject
+	ProductRepository productRepository;
+
 	// TODO Calcular a data de entrega conforme o prazo.
 
 	@Override
@@ -67,19 +72,21 @@ public class BookingServiceImpl implements BookingService {
 			if (pricing != null) {
 				booking.setPricing(pricing);
 			}
+			
+			bookingRepository.persist(booking);
 
-//			if (bookingDTO.getProducts() != null) {
-//				Set<Product> productsDTO = bookingDTO.getProducts();
-//
-//				for (Product product : productsDTO) {
-//					BookingProduct bookingProduct = new BookingProduct();
-//					bookingProduct.setBooking(booking);
-//					bookingProduct.setPrice(product.getPrice());
-//					bookingProduct.setProduct(product);
-//					bookingProductRepository.persist(bookingProduct);
-//					booking.getBookingProducts().add(bookingProduct);
-//				}
-//			}
+			if (bookingDTO.getProducts() != null) {
+				Set<BookingProductDTOForm> productsDTO = bookingDTO.getProducts();
+
+				for (BookingProductDTOForm productDTO : productsDTO) {
+					BookingProduct bookingProduct = new BookingProduct();
+					Product product = productRepository.findById(productDTO.getProductId());
+					bookingProduct.setBooking(booking);
+					bookingProduct.setProduct(product);
+					bookingProductRepository.persist(bookingProduct);
+					booking.getBookingProducts().add(bookingProduct);
+				}
+			}
 
 			Transaction transaction = new Transaction();
 			transaction.setAmount(this.calculatePrice(booking));
@@ -92,7 +99,7 @@ public class BookingServiceImpl implements BookingService {
 			transactionRepository.persist(transaction);
 		}
 
-		bookingRepository.persist(booking);
+
 	}
 
 	@Override
